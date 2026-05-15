@@ -122,15 +122,22 @@ class LinkedList:
             IndexError if n > length
         """
         # Replace the line below with your code
+        if n < 0:
+            raise IndexError("n is negative")
+        if n > self.length:
+            raise IndexError("n > length")
         if n == 0:
             node = Node(item)
+            self._head = node.next
             self._head = node
-        elif n == self.length():
-            node = Node(item)
-            self.append(node)
         else:
             node = Node(item)
-            node.next = 
+            prev = self._head
+            while n > 1:
+                prev = prev.next
+                n -= 1
+            node.next = prev.next
+            prev.next = node
 
 
     def append(self, item: tuple[int, int]) -> None:
@@ -170,10 +177,14 @@ class LinkedList:
         else:
             current = self._head
             count = 0 
-            while count < n:
+            while count <= n:
                 if count == n - 1:
                     beforeNode = current
                 elif count == n:
+                    beforeNode.next = current.next
+                current = current.next
+                count += 1
+                
                     
 
 
@@ -192,12 +203,18 @@ class LinkedList:
             True if item is found in the linkedlist,
             otherwise False
         """
-        # Replace the line below with your code
-        return  in LinkedList
-
-
+        current = self._head
+        for i in range(self.length()):
+            if current.get() == item:
+                return True
+            else:
+                current = current.next
+        return False
+    
+    
 if __name__ == "__main__":
     # Write any test code here and run it with
     # `python datastruct.py`
-
+    lst = LinkedList()
+    
     pass
