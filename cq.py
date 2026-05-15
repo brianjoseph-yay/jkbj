@@ -20,12 +20,23 @@ class CircularQueue:
 
     def __init__(self, size: int):
         self.size = size
-        # Delete the line below and write your code here
-        raise NotImplementedError("__init__ not implemented")
+        self._data = [None] * size
+        self._head = -1
+        self._tail = -1
+        
 
     def __repr__(self) -> str:
         return f"CircularQueue({self.size})"
+        
+    def isEmpty(self):
+        """Checks if the queue is empty"""
+        return self._head == -1
+    
+    def isFull(self):
+        """Checks if the queue is full"""
+        return (self._tail + 1) % self.size == self._head
 
+    
     def enqueue(self, item: tuple[int, int]) -> None:
         """Add item at the end of the queue.
 
@@ -36,8 +47,14 @@ class CircularQueue:
         Return
             None
         """
-        # Delete the line below and write your code here
-        raise NotImplementedError("enqueue not implemented")
+        if self.isFull():
+            print("Queue is full!")
+        elif self.isEmpty():
+            self._head = 0
+            self._tail = 0
+            self._data[self._tail] = item
+            
+        
 
     def dequeue(self) -> tuple[int, int]:
         """Return the item at the head of the queue.
